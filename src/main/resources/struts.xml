@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 开发提示：出错时打印更详细的信息 -->
+	<constant name="struts.devMode" value="true" />
+	<!--当struts.xml配置文件修改后，系统是否重新加载该文件，开发阶段打开此功能 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 允许调用静态方法
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" /> -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+	<!--设置浏览器是否缓存静态内容，建议：开发阶段关闭，运行时开启 -->
+	<constant name="struts.serve.static.browserCache" value="false" />
+
+	<package name="test" namespace="/Test" extends="struts-default">
+		<action name="Index" class="com.hand.actions.TestAction" method="Index" />
+	</package>
+
+	<package name="Home" namespace="/Home" extends="struts-default">
+		<action name="Index" class="homeAction" method="Index">
+			<result name="index">/jsp/view/index.jsp</result>
+		</action>
+		<!--<action name="Resister" class="homeAction" method="Resister">
+			<result name="resister">/jsp/view/register.jsp</result>
+		</action>
+		<action name="DoResister" class="homeAction" method="DoResister">
+			<result name="success" type="redirect">/Home/Index</result>
+			<result name="failed">/jsp/view/register.jsp</result>
+		</action>
+		<action name="DoLogin" class="homeAction" method="DoLogin">
+		</action>
+		<action name="DoLogOut" class="homeAction" method="DoLogOut"></action>-->
+	</package>
+
+
+</struts>
