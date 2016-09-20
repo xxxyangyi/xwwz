@@ -9,61 +9,83 @@ import com.google.gson.annotations.Expose;
 @Entity(name="user")
 public class User implements Serializable {
 	@Id
-	@Column(name="mail")
+	@GeneratedValue
+	@Column(name="id")
 	@Expose
-	private String mail;
-	
-	@Column(name="password")
-	@Expose
-	private String password;
-	
-	@Column(name="name")
-	@Expose
-	private String name;
-	
-	@Column(name="isused")
-	@Expose
-	private Integer isUsed;
+	private int id;
 
-	//  0 管理员  1 专家   2 用户
-	@Column(name="identity")
+	@Column(name="accountName")
 	@Expose
-	private Integer identity;
-	
+	private String accountName;
+
+	@Column(name="nickName")
+	@Expose
+	private String nickName;
+
+	@Column(name="realName")
+	@Expose
+	private String realName;
+
+	@Column(name="age")
+	@Expose
+	private String age;
+
 	@Column(name="sex")
 	@Expose
 	private Integer sex;
 
-	public String getMail() {
-		return mail;
+	@Column(name="IDcard")// 身份证
+	@Expose
+	private Integer IDcard;
+
+	@Column(name="password")
+	@Expose
+	private String password;
+
+	//  1 会员  2 记者  3 管理员
+	@Column(name="identity")
+	@Expose
+	private Integer identity;
+
+
+	public int getId() {
+		return id;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getAccountName() {
+		return accountName;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
 
-	public String getName() {
-		return name;
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
-	public Integer getIdentity() {
-		return identity;
+	public String getRealName() {
+		return realName;
 	}
 
-	public void setIdentity(Integer identity) {
-		this.identity = identity;
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
 	}
 
 	public Integer getSex() {
@@ -74,13 +96,42 @@ public class User implements Serializable {
 		this.sex = sex;
 	}
 
-
-	public Integer getIsUsed() {
-		return isUsed;
+	public Integer getIDcard() {
+		return IDcard;
 	}
 
-	public void setIsUsed(Integer isUsed) {
-		this.isUsed = isUsed;
+	public void setIDcard(Integer IDcard) {
+		this.IDcard = IDcard;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Integer getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity(Integer identity) {
+		this.identity = identity;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", accountName='" + accountName + '\'' +
+				", nickName='" + nickName + '\'' +
+				", realName='" + realName + '\'' +
+				", age='" + age + '\'' +
+				", sex=" + sex +
+				", IDcard=" + IDcard +
+				", password='" + password + '\'' +
+				", identity=" + identity +
+				'}';
+	}
 }

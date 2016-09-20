@@ -1,23 +1,22 @@
 package com.hand.actions;
 
-import java.io.PrintWriter;
-import java.util.Map;
+import com.hand.entity.User;
+import com.hand.service.IUserService;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts2.ServletActionContext;
+public class UserAction extends BaseAction {
 
-import com.hand.entity.User;
-import com.opensymphony.xwork2.ActionContext;
+	@Resource(name = "userService")
+	private IUserService userService;
 
-import static com.hand.commonKey.CommonKey.URL_PERFIX;
+	public void index() throws Exception {
+		System.out.print("---》index 方法");
+		User user = new User();
+		user.setAccountName("yang");
 
-public class HomeAction extends BaseAction {
-
-//	public String Resister() {
-//		return "resister";
-//	}
+		userService.createUser(user);
+	}
 //
 //	public String DoResister() {
 //		try {
