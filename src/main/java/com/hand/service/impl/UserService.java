@@ -32,6 +32,10 @@ public class UserService implements IUserService {
         userDao.Update(user);
     }
 
-	
-	
+    @Override
+    public List<User> FindBySQL(String sql) throws Exception {
+       return userDao.FindBySQL(sql);
+    }
+
+
 }

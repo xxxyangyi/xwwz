@@ -2,6 +2,8 @@ package com.hand.service;
 
 import com.hand.entity.User;
 
+import java.util.List;
+
 /**
  * Created by tuberose on 16-9-20.
  */
@@ -20,4 +22,9 @@ public interface IUserService {
     *	更新用户信息
      */
     public void updateUser(User user) throws Exception;
+
+    /*
+    *	通过SQL 查找 用户 返回用户列表
+    */
+    public List<User> FindBySQL(String sql) throws Exception;
 }

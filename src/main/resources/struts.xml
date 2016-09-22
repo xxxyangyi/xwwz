@@ -18,6 +18,8 @@
 		<action name="createUser" class="userAction" method="createUser"></action>
 		<action name="updateUser" class="userAction" method="updateUser"></action>
 		<action name="deleteUser" class="userAction" method="deleteUser"></action>
+		<action name="login"	  class="userAction" method="login"     ></action>
+		<action name="logout"	  class="userAction" method="logout"     ></action>
 	</package>
 
 

@@ -4,8 +4,9 @@ import com.hand.entity.User;
 import com.hand.service.IUserService;
 
 import javax.annotation.Resource;
-import javax.naming.directory.InitialDirContext;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserAction extends BaseAction {
 
@@ -138,86 +139,62 @@ public class UserAction extends BaseAction {
 
     public void pageingUser() throws Exception {
         System.out.print("---》pageingUser 方法");
-
-        // 更新user 信息
+        // user 信息 的分页查询
 
     }
 
-    public void login() {
-        System.out.print("---》login 方法");
+    public void login() throws Exception {
+        System.out.println("---》login 方法");
         // 用户登陆
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out    = response.getWriter();
+        String accountName = request.getParameter("accountName");
+        String password    = request.getParameter("password");
+        if(accountName == null){
+            System.out.print("accountName 缺失无法进行登陆");
+            out.print("accountName 缺失无法进行登陆");
+            return;
+        }
+        if(accountName == null){
+            System.out.print("password 缺失无法进行登陆");
+            out.print("password 缺失无法进行登陆");
+            return;
+        }
+        String sql = "SELECT * FROM user WHERE accountName='"+accountName+"' AND password = '"+password+"';";
+        List<User> userList = new ArrayList<>();
+        try {
+            userList = userService.FindBySQL(sql);
+        } catch (Exception e) {
+            System.out.println("深层调用导致登陆失败");
+            out.print(0);
+            e.printStackTrace();
+            return;
+        }
+        if(userList.size() == 1){
+            System.out.println("登陆成功");
+            session.put("user",userList.get(0));
+            out.print(1); // 登陆成功
+        }else {
+            System.out.println("登陆失败\n可能原因:\n1.用户名错误\n2.密码错误\n3.有相同用户名和密码的用户");
+            out.print(0); // 登陆失败
+        }
     }
 
-    public void logout() {
-        System.out.print("---》logout 方法");
+    public void logout() throws Exception{
+        System.out.println("---》logout 方法");
         // 用户退出
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        if(session.get("user")==null){
+            System.out.println("您还没有进行登陆");
+            out.println(0);// 退出登陆成功
+            return;
+        }
+        session.remove("user");
+        System.out.println("退出登陆成功");
+        out.print('1');// 退出登陆成功
     }
 
-//
-//	public String DoResister() {
-//		try {
-//			String mail = request.getParameter("mail");
-//			String password = request.getParameter("password");
-//			String name = request.getParameter("name");
-//			Integer identity = Integer.parseInt(request.getParameter("identity"));
-//			Integer sex = Integer.parseInt(request.getParameter("sex"));
-//
-//			User user = new User();
-//			user.setMail(mail);
-//			user.setName(name);
-//			user.setPassword(password);
-//			user.setIdentity(identity);
-//			user.setSex(sex);
-//			user.setIsUsed(1);
-//
-//			userService.AddUser(user);
-//
-//			Map session=ActionContext.getContext().getSession();
-//			session.put("user",user);
-//
-//			return "success";
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//			return "failed";
-//		}
-//	}
-//
-//	// 登陆
-//	public void DoLogin() throws Exception{
-//		PrintWriter out = response.getWriter();
-//		String mail = request.getParameter("mail");
-//		String password = request.getParameter("password");
-//		System.out.println("登陆");
-//		if (userService.IsUserExisted(mail, password)) {
-//			User user = userService.GetUser(mail);
-//			if (user.getIsUsed() == 0)
-//				out.print(-1);
-//			else {
-//				session.put("user", user);
-//				if (((User)session.put("user", user)).getIdentity() == 0) {
-//					out.print(URL_PERFIX+"Manager/Index");
-//				} else if (user.getIdentity() == 1) {
-//					out.print(URL_PERFIX+"Home/Index");
-//				} else {
-//					out.print(URL_PERFIX+"jsp/view/expert/index.jsp");
-//				}
-//			}
-//		} else {
-//			out.print(0);
-//		}
-//
-//	}
-//
-//	public void DoLogOut(){
-//		try{
-//			Map session=ActionContext.getContext().getSession();
-//			session.remove("user");
-//			HttpServletResponse response=ServletActionContext.getResponse();
-//			PrintWriter out = response.getWriter();
-//			out.print("1");
-//		}
-//		catch(Exception ex){
-//			ex.printStackTrace();
-//		}
-//	}
 }
