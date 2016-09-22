@@ -1,6 +1,10 @@
 package com.hand.actions;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hand.entity.User;
+import com.hand.paging.Pager;
+import com.hand.paging.PagingService;
 import com.hand.service.IUserService;
 
 import javax.annotation.Resource;
@@ -8,10 +12,15 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.hand.commonKey.CommonKey.PAGESIZE;
+
 public class UserAction extends BaseAction {
 
     @Resource(name = "userService")
     private IUserService userService;
+
+    @Resource(name = "pagingService")
+    private PagingService<User> pagingUserService;
 
     public void createUser() throws Exception {
         User user = new User();
@@ -140,6 +149,20 @@ public class UserAction extends BaseAction {
     public void pageingUser() throws Exception {
         System.out.print("---》pageingUser 方法");
         // user 信息 的分页查询
+        int pageNo = Integer.parseInt(request.getParameter("PageNo"));
+        pagingUserService.PagingService(User.class);
+        Pager pager = pagingUserService.paging(pageNo,PAGESIZE,null);
+
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        System.out.println("数据："+pager.toString());
+        for (Object user: pager.getResult()){
+            System.out.println("user --->：  "+((User)user).toString());
+        }
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        out.print(gson.toJson(pager));
+        System.out.println("发送数据=="+gson.toJson(pager));
 
     }
 
@@ -195,6 +218,22 @@ public class UserAction extends BaseAction {
         session.remove("user");
         System.out.println("退出登陆成功");
         out.print('1');// 退出登陆成功
+    }
+
+    public void isLogin() throws Exception{
+        System.out.println("---》isLogin 方法   判断用户是否登陆");
+        // 用户退出
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+
+        if(session.get("user")==null){
+            System.out.println("用户没有进行登陆");
+            out.print(0); // 用户没有进行登陆
+        }else{
+            System.out.println("用户已经登陆");
+            out.print(1); // 用户已经登陆
+        }
     }
 
 }

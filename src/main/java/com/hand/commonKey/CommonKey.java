@@ -8,5 +8,6 @@ public class CommonKey {
     // url 地址
 
     public static  String URL_PERFIX ="http://localhost:8080/";
+    public static  int     PAGESIZE  = 5;
 
 }

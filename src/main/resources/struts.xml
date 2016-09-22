@@ -15,11 +15,13 @@
 	<constant name="struts.serve.static.browserCache" value="false" />
 
 	<package name="user" namespace="/user" extends="struts-default">
-		<action name="createUser" class="userAction" method="createUser"></action>
-		<action name="updateUser" class="userAction" method="updateUser"></action>
-		<action name="deleteUser" class="userAction" method="deleteUser"></action>
-		<action name="login"	  class="userAction" method="login"     ></action>
-		<action name="logout"	  class="userAction" method="logout"     ></action>
+		<action name="createUser"  class="userAction" method="createUser" ></action>
+		<action name="updateUser"  class="userAction" method="updateUser" ></action>
+		<action name="deleteUser"  class="userAction" method="deleteUser" ></action>
+		<action name="login"	   class="userAction" method="login"      ></action>
+		<action name="logout"	   class="userAction" method="logout"     ></action>
+		<action name="pageingUser" class="userAction" method="pageingUser"></action>
+		<action name="isLogin"     class="userAction" method="isLogin"></action>
 	</package>
 
 
