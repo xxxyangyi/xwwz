@@ -60,39 +60,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements
 	public void Delete(T model) {
 		getCurrentSession().delete(model);
 	}
-	//  赵天龙 分页
-	@Override
-	public Integer GetSum(String sql) {
-		Query query=getCurrentSession().createSQLQuery(sql).addScalar("sumkey",StandardBasicTypes.INTEGER).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-		Map m=(Map)query.list().get(0);
-		return (Integer) m.get("sumkey");
-	}
-	
-	@Override
-	public Integer GetTotal(Integer sum,Integer numPage) {
-		if(sum==null)return 0;
-		sum=sum%numPage==0?sum/numPage:sum/numPage+1;
-		if(sum==0)sum=1;
-		//this.total=total;
-		return sum;
-	}
 
-	
-	@Override
-	public Integer GetPre(Integer page,Integer total, Integer numPage) {
-		page=page<1?1:page;
-		page=page>total?total:page;
-		Integer pre=(page-1)*numPage;
-		return pre;
-	}
-
-	public List<T> FindList(String sql,Integer pre,Integer numPage){
-		Query query = getCurrentSession().createSQLQuery(sql).addEntity(clazz);
-		query.setFirstResult(pre);
-		query.setMaxResults(numPage);
-		return query.list();
-	}
-	
-	// 赵天龙分页结束
 	
 }

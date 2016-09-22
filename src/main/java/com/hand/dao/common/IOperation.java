@@ -11,9 +11,5 @@ public interface IOperation<T extends Serializable> {
 	T Merge(final T model);
 	List<T> FindBySQL(String str);
 	void Delete(final T model);
-	
-	List<T> FindList(String sql,Integer pre,Integer numPage);
-    Integer GetSum(String sql);
-    Integer GetTotal(Integer sum,Integer numPage);
-    Integer GetPre(Integer page,Integer total, Integer numPage);
+
 }
