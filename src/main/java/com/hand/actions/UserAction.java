@@ -104,13 +104,35 @@ public class UserAction extends BaseAction {
             return;
         }
         System.out.println("更新成功");
-        out.print(1);   // 创建成功
+        out.print(1);   // 更新成功
 
     }
 
     public void deleteUser() throws Exception {
+        // 删除 User
         System.out.print("---》deleteUser 方法");
-        // 更新user 信息
+        User user = new User();
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        String id = request.getParameter("id");
+        if(id==null){
+            System.out.print("没有userID 无法进行删除");
+            out.print(0);
+            return;
+        }
+        user.setId(Integer.parseInt(id));
+        try {
+            userService.deleteUser(user);
+        } catch (Exception e) {
+            System.out.println("深层调用导致删除失败");
+            out.print(0);
+            e.printStackTrace();
+            return;
+        }
+        System.out.println("更新成功");
+        out.print(1);   // 更新成功
+
 
     }
 

@@ -17,6 +17,7 @@
 	<package name="user" namespace="/user" extends="struts-default">
 		<action name="createUser" class="userAction" method="createUser"></action>
 		<action name="updateUser" class="userAction" method="updateUser"></action>
+		<action name="deleteUser" class="userAction" method="deleteUser"></action>
 	</package>
 
 
