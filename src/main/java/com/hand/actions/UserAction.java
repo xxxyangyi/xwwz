@@ -59,7 +59,10 @@ public class UserAction extends BaseAction {
         user.setIDcard(IDcard);
         user.setPassword(password);
         user.setIdentity(Integer.parseInt(identity));
-
+        if(Integer.parseInt(identity) == 2){ //判断是否是记者
+            user.setReviewed(0);
+        }else {}
+            user.setReviewed(1);
         try {
             userService.createUser(user);
         } catch (Exception e) {
@@ -94,7 +97,7 @@ public class UserAction extends BaseAction {
         String IDcard = request.getParameter("IDcard");
         String password = request.getParameter("password");
         String identity = request.getParameter("identity");
-
+        String reviewed = request.getParameter("reviewed");
         user.setId(Integer.parseInt(id));
         if(accountName  !=null)user.setAccountName(accountName);
         if(nickName     !=null)user.setNickName(nickName);
@@ -104,6 +107,7 @@ public class UserAction extends BaseAction {
         if(IDcard       !=null)user.setIDcard(IDcard);
         if(password     !=null)user.setPassword(password);
         if(identity     !=null)user.setIdentity(Integer.parseInt(identity));
+        if(reviewed     !=null)user.setReviewed(Integer.parseInt(reviewed));
 
         try {
             userService.updateUser(user);
@@ -197,7 +201,12 @@ public class UserAction extends BaseAction {
         if(userList.size() == 1){
             System.out.println("登陆成功");
             session.put("user",userList.get(0));
-            out.print(1); // 登陆成功
+            if(userList.get(0).getReviewed()==0){
+                System.out.println("未通过审核");
+                out.print(5); // 未通过审核
+                return;
+            }
+            out.print(userList.get(0).getIdentity()); // 登陆成功
         }else {
             System.out.println("登陆失败\n可能原因:\n1.用户名错误\n2.密码错误\n3.有相同用户名和密码的用户");
             out.print(0); // 登陆失败

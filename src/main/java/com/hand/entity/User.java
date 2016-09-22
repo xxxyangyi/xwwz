@@ -47,6 +47,12 @@ public class User implements Serializable {
 	@Expose
 	private Integer identity;
 
+	//  0 代表没有通过审核   1代表通过审核
+	@Column(name="reviewed")
+	@Expose
+	private Integer reviewed;
+
+
 	public int getId() {
 		return id;
 	}
@@ -119,6 +125,14 @@ public class User implements Serializable {
 		this.identity = identity;
 	}
 
+	public Integer getReviewed() {
+		return reviewed;
+	}
+
+	public void setReviewed(Integer reviewed) {
+		this.reviewed = reviewed;
+	}
+
 	@Override
 	public String toString() {
 		return "User{" +
@@ -131,6 +145,7 @@ public class User implements Serializable {
 				", IDcard='" + IDcard + '\'' +
 				", password='" + password + '\'' +
 				", identity=" + identity +
+				", reviewed=" + reviewed +
 				'}';
 	}
 }
