@@ -65,7 +65,46 @@ public class UserAction extends BaseAction {
 
     public void updateUser() throws Exception {
         System.out.print("---》updateUser 方法");
-        // 更新user 信息
+        User user = new User();
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+
+        System.out.println("---》index 方法");
+        String id          = request.getParameter("id");
+        if(id==null){
+            System.out.print("没有userID 无法进行更新");
+            return;
+        }
+        String accountName = request.getParameter("accountName");
+        String nickName = request.getParameter("nickName");
+        String realName = request.getParameter("realName");
+        String age = request.getParameter("age");
+        String sex = request.getParameter("sex");
+        String IDcard = request.getParameter("IDcard");
+        String password = request.getParameter("password");
+        String identity = request.getParameter("identity");
+
+        user.setId(Integer.parseInt(id));
+        if(accountName  !=null)user.setAccountName(accountName);
+        if(nickName     !=null)user.setNickName(nickName);
+        if(realName     !=null)user.setRealName(realName);
+        if(age          !=null)user.setAge(Integer.parseInt(age));
+        if(sex          !=null)user.setSex(Integer.parseInt(sex));
+        if(IDcard       !=null)user.setIDcard(IDcard);
+        if(password     !=null)user.setPassword(password);
+        if(identity     !=null)user.setIdentity(Integer.parseInt(identity));
+
+        try {
+            userService.updateUser(user);
+        } catch (Exception e) {
+            System.out.println("深层调用导致更新失败");
+            out.print(0);
+            e.printStackTrace();
+            return;
+        }
+        System.out.println("更新成功");
+        out.print(1);   // 创建成功
 
     }
 
