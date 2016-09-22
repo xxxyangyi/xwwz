@@ -231,7 +231,7 @@ public class UserAction extends BaseAction {
 
     public void isLogin() throws Exception{
         System.out.println("---》isLogin 方法   判断用户是否登陆");
-        // 用户退出
+        // 判断用户是否登陆
         response.setContentType("text/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
