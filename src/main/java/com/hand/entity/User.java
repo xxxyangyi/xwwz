@@ -28,15 +28,15 @@ public class User implements Serializable {
 
 	@Column(name="age")
 	@Expose
-	private String age;
+	private int age;
 
 	@Column(name="sex")
 	@Expose
-	private Integer sex;
+	private Integer sex; // 0 ： 女的  1：男的
 
 	@Column(name="IDcard")// 身份证
 	@Expose
-	private Integer IDcard;
+	private String IDcard;
 
 	@Column(name="password")
 	@Expose
@@ -46,7 +46,6 @@ public class User implements Serializable {
 	@Column(name="identity")
 	@Expose
 	private Integer identity;
-
 
 	public int getId() {
 		return id;
@@ -80,11 +79,11 @@ public class User implements Serializable {
 		this.realName = realName;
 	}
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
@@ -96,11 +95,11 @@ public class User implements Serializable {
 		this.sex = sex;
 	}
 
-	public Integer getIDcard() {
+	public String getIDcard() {
 		return IDcard;
 	}
 
-	public void setIDcard(Integer IDcard) {
+	public void setIDcard(String IDcard) {
 		this.IDcard = IDcard;
 	}
 
@@ -127,9 +126,9 @@ public class User implements Serializable {
 				", accountName='" + accountName + '\'' +
 				", nickName='" + nickName + '\'' +
 				", realName='" + realName + '\'' +
-				", age='" + age + '\'' +
+				", age=" + age +
 				", sex=" + sex +
-				", IDcard=" + IDcard +
+				", IDcard='" + IDcard + '\'' +
 				", password='" + password + '\'' +
 				", identity=" + identity +
 				'}';

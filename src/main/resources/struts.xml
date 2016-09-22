@@ -15,7 +15,7 @@
 	<constant name="struts.serve.static.browserCache" value="false" />
 
 	<package name="user" namespace="/user" extends="struts-default">
-		<action name="index" class="userAction" method="index"></action>
+		<action name="createUser" class="userAction" method="createUser"></action>
 	</package>
 
 
