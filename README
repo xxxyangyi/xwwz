@@ -1,0 +1,25 @@
+1. createUser
+
+http://localhost:8080/user/createUser?accountName=yang&nickName=yi&realName=yangyi&age=1&sex=1&IDcard=1234567890121&password=yangyi&identity=1
+
+2. updateUser
+
+http://localhost:8080/user/updateUser?id=1&accountName=yang0&nickName=yi0&realName=yangyi0&age=2&sex=0&IDcard=1234567890120&password=yangyi0&identity=0
+
+3. deleteUser
+http://localhost:8080/user/deleteUser?id=1
+
+4. login
+http://localhost:8080/user/login?accountName=yang&password=yangyi
+
+5. logout
+http://localhost:8080/user/logout
+
+6.pageingUser
+http://localhost:8080/user/pageingUser?PageNo=1
+
+7.isLogin
+http://localhost:8080/user/isLogin
+
+8. createNews
+http://localhost:8080/news/createNews?title=zhenhao&context=xxxxxxxxxxx&category_id=1_2_3
