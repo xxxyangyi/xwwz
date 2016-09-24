@@ -61,8 +61,9 @@ public class UserAction extends BaseAction {
         user.setIdentity(Integer.parseInt(identity));
         if(Integer.parseInt(identity) == 2){ //判断是否是记者
             user.setReviewed(0);
-        }else {}
+        }else {
             user.setReviewed(1);
+        }
         try {
             userService.createUser(user);
         } catch (Exception e) {
