@@ -1,6 +1,8 @@
 package com.hand.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -51,6 +53,15 @@ public class User implements Serializable {
 	@Column(name="reviewed")
 	@Expose
 	private Integer reviewed;
+
+	@OneToMany(mappedBy = "user_id", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	private Set<News> news_id = new HashSet<News>();
+
+	public User(){}
+
+	public User(int id){
+		this.id = id ;
+	}
 
 
 	public int getId() {
@@ -131,6 +142,14 @@ public class User implements Serializable {
 
 	public void setReviewed(Integer reviewed) {
 		this.reviewed = reviewed;
+	}
+
+	public Set<News> getNews_id() {
+		return news_id;
+	}
+
+	public void setNews_id(Set<News> news_id) {
+		this.news_id = news_id;
 	}
 
 	@Override
