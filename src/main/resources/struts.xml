@@ -23,6 +23,9 @@
 		<action name="pageingUser" class="userAction" method="pageingUser"></action>
 		<action name="isLogin"     class="userAction" method="isLogin"></action>
 	</package>
+	<package name="news" namespace="/news" extends="struts-default">
+		<action name="*"  class="newsAction" method="{1}" ></action>
+	</package>
 
 
 </struts>

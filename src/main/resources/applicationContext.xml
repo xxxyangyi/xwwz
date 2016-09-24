@@ -54,5 +54,6 @@
 	<bean class="com.hand.init.InitDataListener" init-method="initMethod"></bean>
 	
 	<bean id="userAction" class="com.hand.actions.UserAction"></bean>
+	<bean id="newsAction" class="com.hand.actions.NewsAction"></bean>
 
 </beans>
