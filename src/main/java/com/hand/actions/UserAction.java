@@ -50,6 +50,23 @@ public class UserAction extends BaseAction {
             out.print(0);
             return;
         }
+        // 校验用户名是否重复
+        String sql = "SELECT * FROM user WHERE accountName='"+accountName+"';";
+        List<User> userList = new ArrayList<>();
+        try {
+            userList = userService.FindBySQL(sql);
+        } catch (Exception e) {
+            System.out.println("深层调用导致登陆失败");
+            out.print(0);
+            e.printStackTrace();
+            return;
+        }
+        if(userList.size()!=0){
+            System.out.println("用户名重复");
+            out.print(2);
+            return;
+        }
+
 
         user.setAccountName(accountName);
         user.setNickName(nickName);
