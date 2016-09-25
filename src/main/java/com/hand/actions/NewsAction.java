@@ -177,8 +177,7 @@ public class NewsAction extends BaseAction {
         pagingNewsService.PagingService(News.class);
         Pager pager = null;
         if(user_ids!=null){
-            Set<User>userSet = getUserSet(user_ids);
-            criterion1 = Restrictions.in("user_id",userSet);
+            criterion1 = Restrictions.eq("user_id",userService.FindByID(Integer.parseInt(user_ids)));
         }
 
         if(reviewed!=null){
