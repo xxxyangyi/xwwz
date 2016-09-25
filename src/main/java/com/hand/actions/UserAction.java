@@ -6,6 +6,8 @@ import com.hand.entity.User;
 import com.hand.paging.Pager;
 import com.hand.paging.PagingService;
 import com.hand.service.IUserService;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 import javax.annotation.Resource;
 import java.io.PrintWriter;
@@ -77,9 +79,9 @@ public class UserAction extends BaseAction {
         user.setPassword(password);
         user.setIdentity(Integer.parseInt(identity));
         if(Integer.parseInt(identity) == 2){ //判断是否是记者
-            user.setReviewed(0);
+            user.setReviewed(0);// 记者会设置权限
         }else {
-            user.setReviewed(1);
+            user.setReviewed(1);//非记者不设置权限
         }
         try {
             userService.createUser(user);
@@ -172,8 +174,12 @@ public class UserAction extends BaseAction {
         System.out.print("---》pageingUser 方法");
         // user 信息 的分页查询
         int pageNo = Integer.parseInt(request.getParameter("PageNo"));
+        String identity = request.getParameter("identity");
+        Criterion criterion = null;
+        if(identity!=null)criterion =  Restrictions.eq("identity",Integer.parseInt(identity));
+
         pagingUserService.PagingService(User.class);
-        Pager pager = pagingUserService.paging(pageNo,PAGESIZE,null);
+        Pager pager = pagingUserService.paging(pageNo,PAGESIZE,criterion);
 
         response.setContentType("text/json");
         response.setCharacterEncoding("UTF-8");
@@ -219,7 +225,7 @@ public class UserAction extends BaseAction {
         if(userList.size() == 1){
             System.out.println("登陆成功");
             session.put("user",userList.get(0));
-            if(userList.get(0).getReviewed()==0){
+            if(userList.get(0).getReviewed()==null || userList.get(0).getReviewed()==0){
                 System.out.println("未通过审核");
                 out.print(5); // 未通过审核
                 return;
@@ -256,10 +262,11 @@ public class UserAction extends BaseAction {
 
         if(session.get("user")==null){
             System.out.println("用户没有进行登陆");
-            out.print(0); // 用户没有进行登陆
+            out.print(""); // 用户没有进行登陆
         }else{
             System.out.println("用户已经登陆");
-            out.print(1); // 用户已经登陆
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            out.print(gson.toJson((User)session.get("user")));
         }
     }
 
