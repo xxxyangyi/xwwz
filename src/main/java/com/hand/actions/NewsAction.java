@@ -64,6 +64,7 @@ public class NewsAction extends BaseAction {
         Set<Category> categorySet = getCategorieSet(category_id);
         news.setCategory(categorySet);
         news.setCreateTime(new Date());
+        news.setReviewed(0);
         try {
             newsService.createNews(news);
         } catch (Exception e) {
@@ -108,8 +109,10 @@ public class NewsAction extends BaseAction {
         if(context!=null)news.setContext(context);
         if(reviewed!=null)news.setReviewed(Integer.parseInt(reviewed));
 
-        Set<Category> categorySet = getCategorieSet(category_id);
-        if(!categorySet.isEmpty())news.setCategory(categorySet);
+        if(category_id!=null){
+            Set<Category> categorySet = getCategorieSet(category_id);
+            news.setCategory(categorySet);
+        }
         try {
             newsService.updateNews(news);
         } catch (Exception e) {
@@ -174,7 +177,7 @@ public class NewsAction extends BaseAction {
         pagingNewsService.PagingService(News.class);
         Pager pager = null;
         if(user_ids!=null){
-            Set<User>       userSet     = getUserSet(user_ids);
+            Set<User>userSet = getUserSet(user_ids);
             criterion1 = Restrictions.in("user_id",userSet);
         }
 
@@ -207,9 +210,6 @@ public class NewsAction extends BaseAction {
     public Set<Category> getCategorieSet (String category_id) throws Exception{
         String[] category_ids =category_id.split("_");
         Set<Category> categorySet = new HashSet<>();
-        if(category_ids.length>1){
-            System.out.println("目前只支持单个类别的查询，多类别查询后续改进");
-        }
         for(String str : category_ids){
             Category category = categoryService.FindByID(Integer.parseInt(str));
             if(category==null){

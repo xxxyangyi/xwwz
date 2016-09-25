@@ -28,17 +28,17 @@ public class News implements Serializable {
 	@Expose
 	private Date createTime;
 
-	//  0 代表没有通过审核   1代表通过审核
+	//  0 代表没有审核   1代表通过审核 2代表没有通过审核
 	@Column(name="reviewed")
 	@Expose
 	private Integer reviewed;
 
-	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id",referencedColumnName ="id",updatable=false)
 	@Expose
 	private User user_id ;
 
-	@ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.EAGER)
 	@JoinTable(name="REL_NEWS_CATEGORY",joinColumns={@JoinColumn(name="news_id")},inverseJoinColumns={@JoinColumn(name="category_id")})
 	@Expose
 	private Set<Category> category = new HashSet<Category>();
