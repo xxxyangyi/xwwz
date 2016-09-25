@@ -26,6 +26,9 @@
 	<package name="news" namespace="/news" extends="struts-default">
 		<action name="*"  class="newsAction" method="{1}" ></action>
 	</package>
+	<package name="category" namespace="/category" extends="struts-default">
+		<action name="*"  class="categoryAction" method="{1}" ></action>
+	</package>
 
 
 </struts>
