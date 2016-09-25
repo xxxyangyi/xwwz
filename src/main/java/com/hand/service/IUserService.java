@@ -27,4 +27,9 @@ public interface IUserService {
     *	通过SQL 查找 用户 返回用户列表
     */
     public List<User> FindBySQL(String sql) throws Exception;
+
+    /*
+    *	通过user_id 查找 用户 返回用户列表
+    */
+    public User FindByID(int userId) throws Exception;
 }

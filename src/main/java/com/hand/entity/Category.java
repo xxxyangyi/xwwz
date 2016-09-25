@@ -20,7 +20,7 @@ public class Category implements Serializable {
 	@Column(name="categoryName")
 	private String categoryName;
 
-	@ManyToMany(mappedBy="category",cascade={CascadeType.ALL})
+	@ManyToMany(mappedBy="category",cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
 	private Set<News> news = new HashSet<>();
 
 

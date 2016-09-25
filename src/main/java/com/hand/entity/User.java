@@ -54,7 +54,7 @@ public class User implements Serializable {
 	@Expose
 	private Integer reviewed;
 
-	@OneToMany(mappedBy = "user_id", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user_id", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private Set<News> news_id = new HashSet<News>();
 
 	public User(){}
@@ -152,19 +152,4 @@ public class User implements Serializable {
 		this.news_id = news_id;
 	}
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"id=" + id +
-				", accountName='" + accountName + '\'' +
-				", nickName='" + nickName + '\'' +
-				", realName='" + realName + '\'' +
-				", age=" + age +
-				", sex=" + sex +
-				", IDcard='" + IDcard + '\'' +
-				", password='" + password + '\'' +
-				", identity=" + identity +
-				", reviewed=" + reviewed +
-				'}';
-	}
 }

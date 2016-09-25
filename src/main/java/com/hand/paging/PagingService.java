@@ -1,5 +1,7 @@
 package com.hand.paging;
 
+import com.hand.entity.Category;
+import com.hand.entity.User;
 import org.hibernate.criterion.Criterion;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +11,7 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by tuberose on 16-9-4.
@@ -40,7 +43,11 @@ public class PagingService<T extends Serializable> {
         return pagingDao.findPageByCriteria(pageNo,pageSize,criterions);
     }
 
-//    public Pager findPageByQuery(int pageNo, int pageSize, Map map){
-//        return pagingDao.findPageByQuery(pageNo,pageSize,map);
-//    };
+    public Pager findPageBySQL(int pageNo, int pageSize,String sql){
+        return  pagingDao.findPageBySQL(pageNo,pageSize,sql);
+    }
+
+    public Pager newsList(int pageNo, int pageSize, Set<User> userSet, Set<Category> categorySet, Criterion... criterions){
+        return pagingDao.newsList(pageNo,pageSize,userSet,categorySet,criterions);
+    }
 }

@@ -23,3 +23,12 @@ http://localhost:8080/user/isLogin
 
 8. createNews
 http://localhost:8080/news/createNews?title=zhenhao&context=xxxxxxxxxxx&category_id=1_2_3
+
+9. updateNews
+http://localhost:8080/news/updateNews?id=13&title=zhenhao1&context=xxxxxxxxxxx1&category_id=1_2
+
+10. deleteNews
+http://localhost:8080/news/deleteNews?id=13
+
+11. pagingByCategoryNews
+http://localhost:8080/news/pagingByCategoryNews?PageNo=1&user_ids=2&category_ids=1_2_3

@@ -5,8 +5,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
+import org.hibernate.transform.Transformers;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -71,6 +73,16 @@ public class AbstractHibernateDao<T extends Serializable> {
             return pager;
         }
 
+    }
+
+    public Pager findPageBySQL(int pageNo, int pageSize,String sql){
+//        Query query = getCurrentSession().createSQLQuery(sql).addEntity(clazz);
+        Query query = getCurrentSession().createQuery(sql);
+        query.setResultTransformer(Transformers.aliasToBean(clazz));
+        query.setFirstResult((pageNo - 1) * pageSize);
+        query.setMaxResults(pageSize);
+        Pager pager = new Pager(pageSize, pageNo, query.list().size(), query.list());
+        return pager;
     }
 
 }

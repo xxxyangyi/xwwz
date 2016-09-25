@@ -36,5 +36,10 @@ public class NewsService implements INewsService {
        return newsDao.FindBySQL(sql);
     }
 
+    @Override
+    public News FindByID(int newsId) throws Exception {
+        return newsDao.FindOne(newsId);
+    }
+
 
 }

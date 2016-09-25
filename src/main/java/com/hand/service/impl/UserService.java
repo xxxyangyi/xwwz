@@ -37,5 +37,9 @@ public class UserService implements IUserService {
        return userDao.FindBySQL(sql);
     }
 
+    @Override
+    public User FindByID(int userId) throws Exception {
+        return userDao.FindOne(userId);
+    }
 
 }

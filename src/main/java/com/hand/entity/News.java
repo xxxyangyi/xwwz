@@ -28,12 +28,14 @@ public class News implements Serializable {
 	@Expose
 	private Date createTime;
 
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id",referencedColumnName ="id",updatable=false)
+	@Expose
 	private User user_id ;
 
-	@ManyToMany(cascade={CascadeType.PERSIST,CascadeType.ALL})
+	@ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
 	@JoinTable(name="REL_NEWS_CATEGORY",joinColumns={@JoinColumn(name="news_id")},inverseJoinColumns={@JoinColumn(name="category_id")})
+	@Expose
 	private Set<Category> category = new HashSet<Category>();
 
 	public News(){}
