@@ -59,4 +59,4 @@ http://localhost:8080/category/updateCategory?category_id=1&categoryName=热点1
 http://localhost:8080/category/deleteCategory?category_id=4
 
 15. pageingCategory
-http://localhost:8080/category/pageingCategory?PageNo=1
+http://localhost:8080/category/pageingCategory?PageNo=1&PageSize=2

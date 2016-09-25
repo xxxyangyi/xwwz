@@ -114,9 +114,14 @@ public class CategoryAction extends BaseAction {
     public void pageingCategory() throws Exception {
         System.out.print("---》pageingCategory 方法");
         int pageNo = Integer.parseInt(request.getParameter("PageNo"));
+        String pageSize = request.getParameter("PageSize");
         pagingCategoryService.PagingService(Category.class);
-        Pager pager = pagingCategoryService.paging(pageNo,PAGESIZE,null);
-
+        Pager pager = null;
+        if(pageSize!=null){
+            pager = pagingCategoryService.paging(pageNo,Integer.parseInt(pageSize),null);
+        }else {
+            pager = pagingCategoryService.paging(pageNo,PAGESIZE,null);
+        }
         response.setContentType("text/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
@@ -129,8 +134,5 @@ public class CategoryAction extends BaseAction {
         System.out.println("发送数据=="+gson.toJson(pager));
 
     }
-
-
-
 
 }
