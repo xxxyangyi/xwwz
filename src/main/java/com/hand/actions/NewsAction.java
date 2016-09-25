@@ -11,6 +11,7 @@ import com.hand.paging.PagingService;
 import com.hand.service.ICategoryService;
 import com.hand.service.INewsService;
 import com.hand.service.IUserService;
+import org.apache.commons.lang.ObjectUtils;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
@@ -90,6 +91,7 @@ public class NewsAction extends BaseAction {
         String title = request.getParameter("title");
         String context = request.getParameter("context");
         String category_id = request.getParameter("category_id");
+        String reviewed = request.getParameter("reviewed");
         if (id == null)
         {
             System.out.println("由于没有新闻的 ID 导致更新新闻失败");
@@ -102,11 +104,12 @@ public class NewsAction extends BaseAction {
             out.println("0");
             return;
         }
-        news.setTitle(title);
-        news.setContext(context);
+        if(title!=null)news.setTitle(title);
+        if(context!=null)news.setContext(context);
+        if(reviewed!=null)news.setReviewed(Integer.parseInt(reviewed));
 
         Set<Category> categorySet = getCategorieSet(category_id);
-        news.setCategory(categorySet);
+        if(!categorySet.isEmpty())news.setCategory(categorySet);
         try {
             newsService.updateNews(news);
         } catch (Exception e) {
@@ -163,16 +166,28 @@ public class NewsAction extends BaseAction {
 
         int pageNo = Integer.parseInt(request.getParameter("PageNo"));
         String user_ids = request.getParameter("user_ids");
-        String category_ids = request.getParameter("category_ids");
+        String category_id = request.getParameter("category_id");
+        String reviewed = request.getParameter("reviewed");
 
-        Set<User>       userSet     = getUserSet(user_ids);
-        Set<Category>   categorySet = getCategorieSet(category_ids);
-
-        Criterion criterion = null;
-        criterion = Restrictions.in("user_id",userSet);
-
+        Criterion criterion1 = null;
+        Criterion criterion2 = null;
         pagingNewsService.PagingService(News.class);
-        Pager pager = pagingNewsService.newsList(pageNo,PAGESIZE,userSet,categorySet,criterion);
+        Pager pager = null;
+        if(user_ids!=null){
+            Set<User>       userSet     = getUserSet(user_ids);
+            criterion1 = Restrictions.in("user_id",userSet);
+        }
+
+        if(reviewed!=null){
+            criterion2 = Restrictions.eq("reviewed",Integer.parseInt(reviewed));
+        }
+
+        if(category_id!=null) {
+           int categoryID = Integer.parseInt(category_id);
+             pager = pagingNewsService.newsList(pageNo,PAGESIZE,categoryID,criterion1,criterion2);
+        }else{
+             pager = pagingNewsService.paging(pageNo,PAGESIZE,criterion1,criterion2);
+        }
 
         response.setContentType("text/json");
         response.setCharacterEncoding("UTF-8");

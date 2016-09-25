@@ -28,6 +28,11 @@ public class News implements Serializable {
 	@Expose
 	private Date createTime;
 
+	//  0 代表没有通过审核   1代表通过审核
+	@Column(name="reviewed")
+	@Expose
+	private Integer reviewed;
+
 	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id",referencedColumnName ="id",updatable=false)
 	@Expose
@@ -74,6 +79,14 @@ public class News implements Serializable {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Integer getReviewed() {
+		return reviewed;
+	}
+
+	public void setReviewed(Integer reviewed) {
+		this.reviewed = reviewed;
 	}
 
 	public User getUser_id() {

@@ -47,7 +47,7 @@ public class PagingService<T extends Serializable> {
         return  pagingDao.findPageBySQL(pageNo,pageSize,sql);
     }
 
-    public Pager newsList(int pageNo, int pageSize, Set<User> userSet, Set<Category> categorySet, Criterion... criterions){
-        return pagingDao.newsList(pageNo,pageSize,userSet,categorySet,criterions);
+    public Pager newsList(int pageNo, int pageSize,int categoryId, Criterion... criterions){
+        return pagingDao.newsList(pageNo,pageSize,categoryId,criterions);
     }
 }

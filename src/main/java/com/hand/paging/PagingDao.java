@@ -32,7 +32,7 @@ public class PagingDao<T extends Serializable> extends AbstractHibernateDao<T> {
     *  通过 user 和  类别限制查询结果
     *
     * */
-    public Pager newsList (int pageNo, int pageSize, Set<User> userSet, Set<Category> categorySet,Criterion... criterions){
+    public Pager newsList (int pageNo, int pageSize, int categoryID,Criterion... criterions){
         Pager pager = null;
         try {
             Criteria criteria = this.getCurrentSession().createCriteria(News.class);
@@ -40,12 +40,7 @@ public class PagingDao<T extends Serializable> extends AbstractHibernateDao<T> {
             criteria.setFetchMode("user_id", FetchMode.JOIN);
             criteria.setFetchMode("category", FetchMode.JOIN);
             List<Integer> list = new FastArrayList();
-            Iterator<Category> iter = categorySet.iterator();
-            while (iter.hasNext()){
-                Category category = iter.next();
-                list.add(category.getId());
-                break;
-            }
+            list.add(categoryID);
             criteria.createAlias("category", "c")
                     .add(Restrictions.in("c.id",list));
             if (criterions != null) {

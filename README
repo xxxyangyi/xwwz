@@ -31,7 +31,7 @@ http://localhost:8080/news/updateNews?id=13&title=zhenhao1&context=xxxxxxxxxxx1&
 http://localhost:8080/news/deleteNews?id=11
 
 11. pagingByCategoryNews
-http://localhost:8080/news/pagingByCategoryNews?PageNo=1&user_ids=2&category_ids=1
+http://localhost:8080/news/pagingByCategoryNews?PageNo=1&user_ids=2&category_id=1
 
 12. createCategory
 http://localhost:8080/category/createCategory?categoryName=热点2
