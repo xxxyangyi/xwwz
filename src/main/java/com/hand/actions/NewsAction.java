@@ -97,6 +97,11 @@ public class NewsAction extends BaseAction {
             return;
         }
         News news = newsService.FindByID(Integer.parseInt(id));
+        if(news == null){
+            System.out.println("没有此条新闻记录");
+            out.println("0");
+            return;
+        }
         news.setTitle(title);
         news.setContext(context);
 
@@ -110,8 +115,8 @@ public class NewsAction extends BaseAction {
             e.printStackTrace();
             return;
         }
-        System.out.println("创建新闻成功");
-        out.print(1);   // 创建成功
+        System.out.println("更新新闻成功");
+        out.print(1);   // 更新新闻成功
     }
 
 

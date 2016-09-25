@@ -55,5 +55,6 @@
 	
 	<bean id="userAction" class="com.hand.actions.UserAction"></bean>
 	<bean id="newsAction" class="com.hand.actions.NewsAction"></bean>
+	<bean id="categoryAction" class="com.hand.actions.CategoryAction"></bean>
 
 </beans>
