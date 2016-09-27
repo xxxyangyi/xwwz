@@ -2,7 +2,6 @@ package com.hand.actions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hand.dto.UserNewsList;
 import com.hand.entity.Category;
 import com.hand.entity.News;
 import com.hand.entity.User;
@@ -11,7 +10,6 @@ import com.hand.paging.PagingService;
 import com.hand.service.ICategoryService;
 import com.hand.service.INewsService;
 import com.hand.service.IUserService;
-import org.apache.commons.lang.ObjectUtils;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
@@ -32,8 +30,6 @@ public class NewsAction extends BaseAction {
     @Resource(name = "userService")
     private IUserService userService;
 
-    @Resource(name = "pagingService")
-    private PagingService<UserNewsList> pagingUserNewsListService;
     @Resource(name = "pagingService")
     private PagingService<News> pagingNewsService;
 
@@ -175,6 +171,7 @@ public class NewsAction extends BaseAction {
         Criterion criterion1 = null;
         Criterion criterion2 = null;
         pagingNewsService.PagingService(News.class);
+
         Pager pager = null;
         if(user_ids!=null){
             criterion1 = Restrictions.eq("user_id",userService.FindByID(Integer.parseInt(user_ids)));
@@ -188,7 +185,9 @@ public class NewsAction extends BaseAction {
            int categoryID = Integer.parseInt(category_id);
              pager = pagingNewsService.newsList(pageNo,PAGESIZE,categoryID,criterion1,criterion2);
         }else{
-             pager = pagingNewsService.paging(pageNo,PAGESIZE,criterion1,criterion2);
+            String[] join = new String[]{"user_id"};
+//            String[] selete = new String[]{"category"};
+             pager = pagingNewsService.paging(pageNo,PAGESIZE,join,null,null,criterion1,criterion2);
         }
 
         response.setContentType("text/json");

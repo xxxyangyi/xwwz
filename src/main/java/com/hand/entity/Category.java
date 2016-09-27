@@ -20,7 +20,7 @@ public class Category implements Serializable {
 	@Column(name="categoryName")
 	private String categoryName;
 
-	@ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
 	@JoinTable(name="REL_NEWS_CATEGORY",inverseJoinColumns={@JoinColumn(name="news_id")},joinColumns={@JoinColumn(name="category_id")})
 	private Set<News> news = new HashSet<>();
 

@@ -1,10 +1,9 @@
 package com.hand.paging;
 
+import com.google.gson.Gson;
+import com.hand.entity.News;
 import com.hand.entity.User;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
@@ -47,13 +46,14 @@ public class AbstractHibernateDao<T extends Serializable> {
         try {
             Criteria criteria = this.getCurrentSession().createCriteria(clazz);
             Criteria criteria2 = this.getCurrentSession().createCriteria(clazz);
+            criteria.setFetchMode("user_id", FetchMode.JOIN);
+            criteria.setFetchMode("category", FetchMode.DEFAULT);
             if (criterions != null) {
                 for (Criterion criterion : criterions) {
                     if (criterion != null) {
                         criteria.add(criterion);
                         criteria2.add(criterion);
                     }
-
                 }
             }
             criteria.setFirstResult((pageNo - 1) * pageSize);
@@ -72,8 +72,62 @@ public class AbstractHibernateDao<T extends Serializable> {
             System.out.print("DAO : 打印结果");
             return pager;
         }
-
     }
+
+    public Pager findPageByCriteria(int pageNo, int pageSize,String[] JOIN,String[] DEFAULTS,String[] SELETES, Criterion... criterions) {
+        Pager pager = null;
+        try {
+            Criteria criteria = this.getCurrentSession().createCriteria(clazz);
+            Criteria criteria2 = this.getCurrentSession().createCriteria(clazz);
+            if(JOIN!=null){
+                for(String join:JOIN){
+                    criteria.setFetchMode(join, FetchMode.JOIN);
+                }
+            }
+            if(DEFAULTS!=null){
+                for(String defaults:DEFAULTS){
+                    criteria.setFetchMode(defaults, FetchMode.DEFAULT);
+                }
+            }
+            if(SELETES!=null){
+                for(String selete:SELETES){
+                    criteria.setFetchMode(selete, FetchMode.SELECT);
+                }
+            }
+            if (criterions != null) {
+                for (Criterion criterion : criterions) {
+                    if (criterion != null) {
+                        criteria.add(criterion);
+                        criteria2.add(criterion);
+                    }
+                }
+            }
+            criteria.setFirstResult((pageNo - 1) * pageSize);
+            criteria.setMaxResults(pageSize);
+
+            List<T> result = (List<T>) criteria.list();
+            // 获取根据条件分页查询的总行数
+            Hibernate.initialize(result);
+            int rowCount = Integer.parseInt((criteria2.setProjection(Projections.rowCount()).uniqueResult()).toString());
+            pager = new Pager(pageSize, pageNo, rowCount, result);
+            System.out.println("DAO : 数据安放完成");
+
+        } catch (RuntimeException re) {
+            System.out.print("DAO : 出现异常" + re);
+            throw re;
+        } finally {
+            System.out.print("DAO : 打印结果");
+            return pager;
+        }
+    }
+
+
+
+
+
+
+
+
 
     public Pager findPageBySQL(int pageNo, int pageSize,String sql){
 //        Query query = getCurrentSession().createSQLQuery(sql).addEntity(clazz);

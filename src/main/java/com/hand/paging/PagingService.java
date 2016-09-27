@@ -1,17 +1,10 @@
 package com.hand.paging;
 
-import com.hand.entity.Category;
-import com.hand.entity.User;
 import org.hibernate.criterion.Criterion;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by tuberose on 16-9-4.
@@ -41,6 +34,10 @@ public class PagingService<T extends Serializable> {
      */
     public Pager paging(int pageNo, int pageSize, Criterion... criterions){
         return pagingDao.findPageByCriteria(pageNo,pageSize,criterions);
+    }
+
+    public Pager paging(int pageNo, int pageSize,String[] JOIN,String[] DEFAULTS,String[] SELETES, Criterion... criterions){
+        return pagingDao.findPageByCriteria(pageNo, pageSize,JOIN, DEFAULTS,SELETES, criterions);
     }
 
     public Pager findPageBySQL(int pageNo, int pageSize,String sql){
