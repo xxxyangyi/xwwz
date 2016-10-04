@@ -20,7 +20,7 @@ public class News implements Serializable {
 	@Expose
 	private String title;
 
-	@Column(name="context")
+	@Column(name="context",columnDefinition="TEXT")
 	@Expose
 	private String context;
 
@@ -28,7 +28,7 @@ public class News implements Serializable {
 	@Expose
 	private Date createTime;
 
-	//  0 代表没有审核   1代表通过审核 2代表没有通过审核
+	//  0 代表没有审核   1代表通过审核  2代表没有通过审核
 	@Column(name="reviewed")
 	@Expose
 	private Integer reviewed;

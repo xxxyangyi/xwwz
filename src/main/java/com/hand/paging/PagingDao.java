@@ -39,9 +39,13 @@ public class PagingDao<T extends Serializable> extends AbstractHibernateDao<T> {
             Criteria criteria2 = this.getCurrentSession().createCriteria(News.class);
             criteria.setFetchMode("user_id", FetchMode.JOIN);
             criteria.setFetchMode("category", FetchMode.JOIN);
+            criteria2.setFetchMode("category", FetchMode.JOIN);
+            Persis
             List<Integer> list = new FastArrayList();
             list.add(categoryID);
             criteria.createAlias("category", "c")
+                    .add(Restrictions.in("c.id",list));
+            criteria2.createAlias("category", "c")
                     .add(Restrictions.in("c.id",list));
             if (criterions != null) {
                 for (Criterion criterion : criterions) {

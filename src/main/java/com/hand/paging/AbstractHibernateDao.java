@@ -46,16 +46,6 @@ public class AbstractHibernateDao<T extends Serializable> {
         try {
             Criteria criteria = this.getCurrentSession().createCriteria(clazz);
             Criteria criteria2 = this.getCurrentSession().createCriteria(clazz);
-            criteria.setFetchMode("user_id", FetchMode.JOIN);
-            criteria.setFetchMode("category", FetchMode.DEFAULT);
-            if (criterions != null) {
-                for (Criterion criterion : criterions) {
-                    if (criterion != null) {
-                        criteria.add(criterion);
-                        criteria2.add(criterion);
-                    }
-                }
-            }
             criteria.setFirstResult((pageNo - 1) * pageSize);
             criteria.setMaxResults(pageSize);
 
