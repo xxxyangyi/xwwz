@@ -6,9 +6,9 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+
+import org.hibernate.*;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.StandardBasicTypes;
 
@@ -61,5 +61,25 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements
 		getCurrentSession().delete(model);
 	}
 
-	
+	public List<T> findByCriteria(String[] JOIN,Criterion... criterions) {
+		try {
+			Criteria criteria = this.getCurrentSession().createCriteria(clazz);
+			if(JOIN!=null){
+				for(String join:JOIN){
+					criteria.setFetchMode(join, FetchMode.JOIN);
+				}
+			}
+			if (criterions != null) {
+				for (Criterion criterion : criterions) {
+					if (criterion != null) {
+						criteria.add(criterion);
+					}
+				}
+			}
+			return criteria.list();
+
+		} catch (RuntimeException re) {
+			throw re;
+		}
+	}
 }
