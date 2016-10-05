@@ -1,6 +1,7 @@
 package com.hand.service;
 
 import com.hand.entity.Category;
+import org.hibernate.criterion.Criterion;
 
 import java.util.List;
 
@@ -32,4 +33,6 @@ public interface ICategoryService {
     *	通过ID 查找 类别 返回 类别
     */
     public Category  FindByID(int categoryId) throws Exception;
+
+    public List<Category> findByCriteria(String[] JOIN,Criterion... criterions) throws Exception;
 }

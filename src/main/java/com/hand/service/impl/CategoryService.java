@@ -3,6 +3,7 @@ package com.hand.service.impl;
 import com.hand.dao.ICategoryDao;
 import com.hand.entity.Category;
 import com.hand.service.ICategoryService;
+import org.hibernate.criterion.Criterion;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +40,11 @@ public class CategoryService implements ICategoryService {
     @Override
     public Category FindByID(int categoryId) throws Exception {
         return categoryDao.FindOne(categoryId);
+    }
+
+    @Override
+    public List<Category> findByCriteria(String[] JOIN, Criterion... criterions) throws Exception {
+        return categoryDao.findByCriteria(JOIN, criterions);
     }
 
 

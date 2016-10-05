@@ -16,20 +16,17 @@ public class BaseAction extends ActionSupport implements SessionAware,ServletReq
 
 	@Override
 	public void setServletResponse(HttpServletResponse response) {
-		// TODO Auto-generated method stub
 		this.response = response;
 
 	}
 
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		this.request = request;
 	}
 
 	@Override
 	public void setSession(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		this.session = map;
 	}
 }

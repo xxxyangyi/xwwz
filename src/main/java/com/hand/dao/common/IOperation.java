@@ -1,5 +1,7 @@
 package com.hand.dao.common;
 
+import org.hibernate.criterion.Criterion;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,5 +13,5 @@ public interface IOperation<T extends Serializable> {
 	T Merge(final T model);
 	List<T> FindBySQL(String str);
 	void Delete(final T model);
-
+	public List<T> findByCriteria(String[] JOIN,Criterion... criterions);
 }

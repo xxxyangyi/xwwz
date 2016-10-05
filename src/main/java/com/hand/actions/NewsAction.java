@@ -165,11 +165,12 @@ public class NewsAction extends BaseAction {
 
         int pageNo = Integer.parseInt(request.getParameter("PageNo"));
         String user_ids = request.getParameter("user_ids");
-        String category_id = request.getParameter("category_id");
+        String category_ids = request.getParameter("category_ids");
         String reviewed = request.getParameter("reviewed");
 
         Criterion criterion1 = null;
         Criterion criterion2 = null;
+        Criterion criterion3 = null;
         pagingNewsService.PagingService(News.class);
 
         Pager pager = null;
@@ -181,14 +182,11 @@ public class NewsAction extends BaseAction {
             criterion2 = Restrictions.eq("reviewed",Integer.parseInt(reviewed));
         }
 
-        if(category_id!=null) {
-           int categoryID = Integer.parseInt(category_id);
-//             pager = pagingNewsService.newsList(pageNo,PAGESIZE,categoryID,criterion1,criterion2);
-        }else{
-            String[] join = new String[]{"user_id","category"};
-//            String[] selete = new String[]{"category"};
-             pager = pagingNewsService.paging(pageNo,PAGESIZE,join,null,null,criterion1,criterion2);
+        if(category_ids!=null) {
+            criterion3 = Restrictions.in("id",getNewsId(category_ids));
         }
+
+        pager = pagingNewsService.paging(pageNo,PAGESIZE,new String[]{"user_id","category"},null,null,criterion1,criterion2,criterion3);
 
         response.setContentType("text/json");
         response.setCharacterEncoding("UTF-8");
@@ -216,6 +214,24 @@ public class NewsAction extends BaseAction {
             categorySet.add(category);
         }
         return categorySet;
+    }
+    // 根据类别获取新闻id 的通用方法
+    public Set<Integer> getNewsId (String category_id) throws Exception{
+        String[] category_ids =category_id.split("_");
+        Set<Integer> newsIdSet = new HashSet<>();
+        for(String str : category_ids){
+            Criterion criterion = Restrictions.eq("id",Integer.parseInt(str));
+            List <Category> categoryList= categoryService.findByCriteria(new String[]{"news"},criterion);
+            for (Category ca : categoryList){
+                for(News news:ca.getNews()){
+                    newsIdSet.add(news.getId());
+                }
+            }
+        }
+        if(newsIdSet.isEmpty()){
+            newsIdSet.add(-1);
+        }
+        return newsIdSet;
     }
 
     // 获取 用户列表 的通用方法
