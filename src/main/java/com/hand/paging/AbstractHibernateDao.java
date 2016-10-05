@@ -42,36 +42,7 @@ public class AbstractHibernateDao<T extends Serializable> {
      * @function 分页显示符合所有的记录数，将查询结果封装为Pager
      */
     public Pager findPageByCriteria(int pageNo, int pageSize, Criterion... criterions) {
-        Pager pager = null;
-        try {
-            Criteria criteria = this.getCurrentSession().createCriteria(clazz);
-            Criteria criteria2 = this.getCurrentSession().createCriteria(clazz);
-            criteria.setFetchMode("user_id", FetchMode.JOIN);
-            criteria.setFetchMode("category", FetchMode.DEFAULT);
-            if (criterions != null) {
-                for (Criterion criterion : criterions) {
-                    if (criterion != null) {
-                        criteria.add(criterion);
-                        criteria2.add(criterion);
-                    }
-                }
-            }
-            criteria.setFirstResult((pageNo - 1) * pageSize);
-            criteria.setMaxResults(pageSize);
-
-            List<T> result = (List<T>) criteria.list();
-            // 获取根据条件分页查询的总行数
-            int rowCount = Integer.parseInt((criteria2.setProjection(Projections.rowCount()).uniqueResult()).toString());
-            pager = new Pager(pageSize, pageNo, rowCount, result);
-            System.out.println("DAO : 数据安放完成");
-
-        } catch (RuntimeException re) {
-            System.out.print("DAO : 出现异常" + re);
-            throw re;
-        } finally {
-            System.out.print("DAO : 打印结果");
-            return pager;
-        }
+        return findPageByCriteria(pageNo,pageSize,criterions);
     }
 
     public Pager findPageByCriteria(int pageNo, int pageSize,String[] JOIN,String[] DEFAULTS,String[] SELETES, Criterion... criterions) {
@@ -121,18 +92,9 @@ public class AbstractHibernateDao<T extends Serializable> {
         }
     }
 
-
-
-
-
-
-
-
-
     public Pager findPageBySQL(int pageNo, int pageSize,String sql){
-//        Query query = getCurrentSession().createSQLQuery(sql).addEntity(clazz);
-        Query query = getCurrentSession().createQuery(sql);
-        query.setResultTransformer(Transformers.aliasToBean(clazz));
+        Query query = getCurrentSession().createSQLQuery(sql).addEntity(clazz);
+
         query.setFirstResult((pageNo - 1) * pageSize);
         query.setMaxResults(pageSize);
         Pager pager = new Pager(pageSize, pageNo, query.list().size(), query.list());

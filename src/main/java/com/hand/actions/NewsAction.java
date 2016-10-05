@@ -183,9 +183,9 @@ public class NewsAction extends BaseAction {
 
         if(category_id!=null) {
            int categoryID = Integer.parseInt(category_id);
-             pager = pagingNewsService.newsList(pageNo,PAGESIZE,categoryID,criterion1,criterion2);
+//             pager = pagingNewsService.newsList(pageNo,PAGESIZE,categoryID,criterion1,criterion2);
         }else{
-            String[] join = new String[]{"user_id"};
+            String[] join = new String[]{"user_id","category"};
 //            String[] selete = new String[]{"category"};
              pager = pagingNewsService.paging(pageNo,PAGESIZE,join,null,null,criterion1,criterion2);
         }

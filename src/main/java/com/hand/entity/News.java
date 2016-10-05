@@ -40,6 +40,7 @@ public class News implements Serializable {
 
 	@ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.LAZY)
 	@JoinTable(name="REL_NEWS_CATEGORY",joinColumns={@JoinColumn(name="news_id")},inverseJoinColumns={@JoinColumn(name="category_id")})
+	@Expose
 	private Set<Category> category = new HashSet<Category>();
 
 	public News(){}

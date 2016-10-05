@@ -28,45 +28,4 @@ public class PagingDao<T extends Serializable> extends AbstractHibernateDao<T> {
 
     public PagingDao(){}
 
-    /*
-    *  通过 user 和  类别限制查询结果
-    *
-    * */
-    public Pager newsList (int pageNo, int pageSize, int categoryID,Criterion... criterions){
-        Pager pager = null;
-        try {
-            Criteria criteria = this.getCurrentSession().createCriteria(News.class);
-            Criteria criteria2 = this.getCurrentSession().createCriteria(News.class);
-            criteria.setFetchMode("user_id", FetchMode.JOIN);
-            criteria.setFetchMode("category", FetchMode.JOIN);
-            List<Integer> list = new FastArrayList();
-            list.add(categoryID);
-            criteria.createAlias("category", "c")
-                    .add(Restrictions.in("c.id",list));
-            if (criterions != null) {
-                for (Criterion criterion : criterions) {
-                    if (criterion != null) {
-                        criteria.add(criterion);
-                        criteria2.add(criterion);
-                    }
-
-                }
-            }
-            criteria.setFirstResult((pageNo - 1) * pageSize);
-            criteria.setMaxResults(pageSize);
-            List<T> result = (List<T>) criteria.list();
-            // 获取根据条件分页查询的总行数
-            int rowCount = Integer.parseInt((criteria2.setProjection(Projections.rowCount()).uniqueResult()).toString());
-            pager = new Pager(pageSize, pageNo, rowCount, result);
-            System.out.println("DAO : 数据安放完成");
-
-        } catch (RuntimeException re) {
-            System.out.print("DAO : 出现异常" + re);
-            throw re;
-        } finally {
-            System.out.print("DAO : 打印结果");
-            return pager;
-        }
-    }
-
 }
