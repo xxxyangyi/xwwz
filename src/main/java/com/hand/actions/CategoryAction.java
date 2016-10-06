@@ -6,7 +6,6 @@ import com.hand.entity.Category;
 import com.hand.paging.Pager;
 import com.hand.paging.PagingService;
 import com.hand.service.ICategoryService;
-import com.hand.service.impl.CategoryService;
 import javax.annotation.Resource;
 import java.io.PrintWriter;
 
