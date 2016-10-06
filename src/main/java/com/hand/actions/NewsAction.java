@@ -153,7 +153,20 @@ public class NewsAction extends BaseAction {
         System.out.println("删除新闻成功");
         out.print(1); //删除成功
     }
-
+    public void selectByNewsID() throws Exception {
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        System.out.println("---》selectByNewsID 方法");
+        String news_id = request.getParameter("news_id");
+        String[] join = new String[]{"user_id"};
+        Criterion criterion1 = Restrictions.eq("id",Integer.parseInt(news_id));
+        pagingNewsService.PagingService(News.class);
+        Pager pager = pagingNewsService.paging(1,PAGESIZE,join,null,null,criterion1);
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        out.print(gson.toJson(pager));
+        System.out.print("selectByNewsID 成功");
+    }
 
 
     // 根据 类别、用户、分页查询新闻

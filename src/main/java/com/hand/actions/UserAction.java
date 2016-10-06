@@ -224,12 +224,20 @@ public class UserAction extends BaseAction {
         }
         if(userList.size() == 1){
             System.out.println("登陆成功");
-            session.put("user",userList.get(0));
-            if(userList.get(0).getReviewed()==null || userList.get(0).getReviewed()==0){
-                System.out.println("未通过审核");
-                out.print(5); // 未通过审核
-                return;
+            if(userList.get(0).getIdentity()==2){
+                session.put("user",userList.get(0));
+                if(userList.get(0).getReviewed()==null || userList.get(0).getReviewed()==2){
+                    System.out.println("未通过审核");
+                    out.print(5); // 未通过审核
+                    return;
+                }
+                if(userList.get(0).getReviewed()==null || userList.get(0).getReviewed()==0){
+                    System.out.println("未通过审核");
+                    out.print(4); // 待通过审核
+                    return;
+                }
             }
+
             out.print(userList.get(0).getIdentity()); // 登陆成功
         }else {
             System.out.println("登陆失败\n可能原因:\n1.用户名错误\n2.密码错误\n3.有相同用户名和密码的用户");

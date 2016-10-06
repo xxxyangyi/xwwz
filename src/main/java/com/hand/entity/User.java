@@ -49,7 +49,7 @@ public class User implements Serializable {
 	@Expose
 	private Integer identity;
 
-	//  0 代表没有通过审核   1代表通过审核
+	//  0 代表待审核   1代表通过审核  2表示审核没有通过
 	@Column(name="reviewed")
 	@Expose
 	private Integer reviewed;
