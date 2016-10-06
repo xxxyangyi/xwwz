@@ -17,7 +17,6 @@ public class BaseAction extends ActionSupport implements SessionAware,ServletReq
 	@Override
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
-
 	}
 
 	@Override
