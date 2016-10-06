@@ -1,11 +1,8 @@
 package com.hand.init;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.ServletContextAware;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.ServletContext;
 
 /**
  * Created by tuberose on 16-9-1.
