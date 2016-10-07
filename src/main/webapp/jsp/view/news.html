@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="stylesheet/news.css">
+    <link rel="stylesheet" href="stylesheet/bootstrap.min.css">
+    <script src="js/jquery2.0.0.min.js"></script>
+    <script src="js/news.js"></script>
+    <script src="js/paging.js"></script>
+</head>
+<body>
+<header>
+    <div class="top_line">
+        <span>推荐</span>
+        <span>热点</span>
+        <span>视频</span>
+        <span>图片</span>
+        <span>段子</span>
+        <span>社会</span>
+        <span>娱乐</span>
+        <span>科技</span>
+        <span>体育</span>
+        <span>汽车</span>
+        <span>财经</span>
+        <span>搞笑</span>
+        <span id="more">更多<i class="glyphicon glyphicon-chevron-down" id="jiantou"></i></span>
+        <div class="top_line_more">
+            <div class="triangle_box">
+                <div class="triangle-up"></div>
+            </div>
+            <p>探索</p>
+            <p>育儿</p>
+            <p>养生</p>
+            <p>故事</p>
+            <p>美文</p>
+            <p>游戏</p>
+            <p>历史</p>
+            <p>美食</p>
+        </div>
+    </div>
+</header>
+<div>
+    <div class="select_box col-md-12">
+        <div class="col-md-offset-1 col-md-10">
+            <div>
+                <img src="images/logo_zi.png">
+                <input type="text">
+                <span class="glyphicon glyphicon-search"></span>
+            </div>
+            <h4>登录</h4>
+        </div>
+    </div>
+    <div class="in_box col-md-12">
+        <div class="col-md-offset-1 col-md-7">
+            <div id="news_model">
+                <div class="zhengwen">
+                    <h1>@@@title@</h1>
+                    <span>@@@createTime@</span>
+                    <p>@@@context@</p>
+                </div>
+            </div>
+            <div id="news">
+
+            </div>
+            <div class="fenxiang">
+                <span>分享到：</span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <p>收藏</p>
+            </div>
+            <div class="xiangguan">
+                <h4>相关阅读</h4>
+                <div class="media">
+                    <a class="media-left media-middle" href="#">
+                        <img src="images/xiangguan_1.jpg" alt="新闻图片">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">著名街球手吴悠云南打球遇激烈肢体冲突！坚决杜绝球场暴力！</h4>
+                        <!--<img src="images/logo.png" class="pic_tou">-->
+                        <span>川报观察 ⋅ 娱乐 ⋅ 5小时前 ⋅ 410评论</span>
+                        <!--<img src="images/logo.png">-->
+                        <!--<p>川报观察 ⋅ 娱乐 ⋅ 5小时前 <span class="no_zan"><span class="glyphicon glyphicon-comment"></span><span> 11</span><span class="glyphicon glyphicon-heart"></span><span> 11</span></span></p>-->
+                    </div>
+                </div>
+                <div class="media">
+                    <a class="media-left media-middle" href="#">
+                        <img src="images/pic_news1.jpg" alt="新闻图片">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">在火车车轮前面装个摄像头，可以清楚的看到火车通过道岔变轨过程</h4>
+                        <!--<img src="images/logo.png" class="pic_tou">-->
+                        <span>川报观察 ⋅ 娱乐 ⋅ 5小时前 ⋅ 410评论</span>
+                        <!--<img src="images/logo.png">-->
+                        <!--<p>川报观察 ⋅ 娱乐 ⋅ 5小时前 <span class="no_zan"><span class="glyphicon glyphicon-comment"></span><span> 11</span><span class="glyphicon glyphicon-heart"></span><span> 11</span></span></p>-->
+                    </div>
+                </div>
+                <div class="media">
+                    <a class="media-left media-middle" href="#">
+                        <img src="images/pic_news1.jpg" alt="新闻图片">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">在火车车轮前面装个摄像头，可以清楚的看到火车通过道岔变轨过程</h4>
+                        <p>9月11日，吴悠率领他的北京RPZ球队在云南某比赛的半决赛中，与对方球队发生大规模肢体冲突。吴悠的RPZ只有6个人，而对方人多势众，吴悠遭到数人围攻，甚至被一脚踹倒在地，连悠嫂</p>
+                        <!--<img src="images/logo.png" class="pic_tou">-->
+                        <span>川报观察 ⋅ 娱乐 ⋅ 5小时前 ⋅ 410评论</span>
+                        <!--<img src="images/logo.png">-->
+                        <!--<p>川报观察 ⋅ 娱乐 ⋅ 5小时前 <span class="no_zan"><span class="glyphicon glyphicon-comment"></span><span> 11</span><span class="glyphicon glyphicon-heart"></span><span> 11</span></span></p>-->
+                    </div>
+                </div>
+                <h4 class="aaa">文章评论</h4>
+                <div class="pinglun_box">
+                    <div class="media">
+                        <a class="media-left" href="#">
+                            <img src="images/morentouxiang.png" alt="新闻图片">
+                        </a>
+                        <div class="media-body">
+                            <textarea rows="5"></textarea>
+                            <div class="pinglun_btn_box">
+                                <button class="pinglun_btn">发表</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="people_pl">
+                    <div class="media">
+                        <a class="media-left" href="#">
+                            <img src="images/pinglun_touxiang.png" alt="新闻图片">
+                        </a>
+                        <div class="media-body">
+                            <h5>印第安纳囧</h5>
+                            <p>一分为二的说吴悠这场比赛确实没什么大动作，我不喜欢吴悠，喜欢赵强。但是确实昆明这边动作太烂了，各种黑肘，各种垫脚。我就在场边全场观看。美女裁判真的是太美了，180左右，太有气质了。</p>
+                            <span>09-12 10:22</span>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <a class="media-left" href="#">
+                            <img src="images/pinglun_touxiang.png" alt="新闻图片">
+                        </a>
+                        <div class="media-body">
+                            <h5>印第安纳囧</h5>
+                            <p>他还不懂街球的真正含义，街球玩的是技术技巧，人球结合，不是为了进球不折手段</p>
+                            <span>09-12 10:22</span>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <a class="media-left" href="#">
+                            <img src="images/pinglun_touxiang.png" alt="新闻图片">
+                        </a>
+                        <div class="media-body">
+                            <h5>路人甲乙丙丁</h5>
+                            <p>一分为二的说吴悠这场比赛确实没什么大动作，我不喜欢吴悠，喜欢赵强。但是确实昆明这边动作太烂了，各种黑肘，各种垫脚。我就在场边全场观看。美女裁判真的是太美了，180左右，太有气质了。</p>
+                            <span>09-12 10:22</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="people_box col-md-12">
+                <div class="touxiang_box col-md-12">
+                    <img class="people_touxiang" src="images/logo.png">
+                </div>
+                <div class="jianjie_box col-md-12">
+                    <h4>三十年莱斯特城球迷</h4>
+                    <p>人生如戏，嬉笑怒骂后，该亮出我三十年莱斯特城球迷的身份了！</p>
+                </div>
+                <div class="people_news col-md-12">
+                    <div class="people_news_box">
+                        <div class="triangle-right"></div>
+                        <p>iPhone 7 真机上手体验，到底有何不同？</p>
+                    </div>
+                    <div class="people_news_box">
+                        <div class="triangle-right"></div>
+                        <p>iPhone 7 真机上手体验，到底有何不同？</p>
+                    </div>
+                    <div class="people_news_box">
+                        <div class="triangle-right"></div>
+                        <p>iPhone 7 真机上手体验，到底有何不同？</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+</footer>
+<script type="text/javascript">
+    if(localStorage['news_id']!=null){
+        var href = "http://localhost:8080/news/selectByNewsID?news_id="+localStorage['news_id'];
+        pagingStart('#news', '#news_model', href,false);
+    }
+</script>
+</body>
+</html>

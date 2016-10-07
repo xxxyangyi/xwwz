@@ -1,0 +1,215 @@
+html,body{
+    height: 100%;
+    width: 100%;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 微软雅黑;
+}
+p{
+    text-align:justify;
+    text-justify: inter-ideograph;
+}
+ul{
+    list-style-type: none;
+}
+img{
+    border:0;
+    vertical-align:bottom;
+}
+::-ms-clear, ::-ms-reveal{display: none;}          /*去掉输入框后面的功能按钮*/
+header{
+    background-color: #f8f8f8;
+    border-bottom: 2px solid #ab1314;
+    margin-bottom: 30px;
+}
+header .col-md-8{
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+header .col-md-4{
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+header .col-md-8 img{
+    height: 40px;
+    display: inline-block;
+}
+header .col-md-8 p{
+    font-size: 20px;
+    color: rgba(171, 19, 20, 0.76);
+    display: inline-block;
+    margin-top: 26px;
+    margin-left: 40px;
+}
+header .col-md-4 span{
+    font-size: 16px;
+    color: #9e9e9e;
+    padding-right: 15px;
+    margin-right: 15px;
+    border-right: 1px solid #e6e6e6;
+    line-height: 16px;
+}
+header .col-md-4 span:hover{
+    color: #4f5157;
+}
+header .col-md-4 span:nth-last-of-type(1){
+    border-right: none;
+}
+.in{
+    padding: 0 40px;
+}
+.in .in_input{
+    height: 40px;
+    border: 1px solid #e6e6e6;
+    border-radius: 40px;
+    padding-left: 55px;
+    position: relative;
+    background-color: #f8f8f8;
+    display: block;
+    margin-bottom: 25px;
+}
+.in .glyphicon-search{
+    font-size: 20px;
+    color: #cdcdcd;
+    position: absolute;
+    top: 10px;
+    left: 58px;
+}
+.in button{
+    height: 40px;
+    background-color: #a7acb4;
+    border: 1px solid #9297a0;
+    width: 100px;
+    border-bottom-right-radius: 45px;
+    border-top-right-radius: 45px;
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    right: 40px;
+}
+.in h4{
+    font-size: 18px;
+    color: #5d5d5d;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+.select_list{
+    padding: 0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.select_list .col-md-8{
+    padding-left: 0;
+}
+.select_list .col-md-8 p{
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    width: 70px;
+    color: #9e9e9e;
+    margin-top: 15px;
+}
+.select_list .col-md-8 h2 span{
+    color: rgba(171, 19, 20, 0.76);
+}
+.select_list .col-md-8 p:nth-of-type(1){
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.select_list .col-md-8 p:nth-of-type(2){
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-left: -4px;
+}
+.select_list .col-md-8 p:nth-of-type(3){
+    float: right;
+    width: 140px;
+}
+.select_list .col-md-8 p:nth-of-type(1):hover{
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+.select_list .col-md-8 p:nth-of-type(2):hover{
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+.select_list h2{
+    margin-top: 0;
+    line-height: 35px;
+    font-size: 24px;
+    color: #4f5157;
+    font-weight: 600;
+}
+.select_list img{
+    max-height: 120px;
+    padding: 0;
+}
+.hot h3{
+    margin-top: 0;
+    font-size: 18px;
+    color: #9e9e9e;
+    font-weight: 600;
+}
+.hot .touxiang{
+    height: 22px;
+    width: 22px;
+    border-radius: 22px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.hot h4{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 16px;
+    margin-left: 5px;
+    color: #4f5157;
+}
+.hot h5{
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+    font-size: 16px;
+    color: #4e7dd2;
+    margin-right: 20px;
+}
+.hot .qipao p{
+    font-size: 16px;
+    margin: 0;
+}
+.hot .qipao{
+    background-color: #fbfbfb;
+    border: 1px solid #e7e7e7;
+    padding: 15px 20px;
+    position: relative;
+    margin-top: 5px;
+}
+.hot .qipao .triangle-up {
+    width:0;
+    height:0;
+    border-left:7px solid transparent;
+    border-right:7px solid transparent;
+    border-bottom:8px solid #e7e7e7;
+    position: absolute;
+    left: 35px;
+    top: -8px;
+}
+.hot .where_from p:nth-of-type(1){
+    color: #9e9e9e;
+    margin: 10px 0;
+}
+.hot .where_from p:nth-of-type(2){
+    font-size: 15px;
+    margin: 10px 0;
+}
+.hot_list{
+    margin: 20px 0;
+}
